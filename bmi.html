@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Healzy — Most Accurate BMI Calculator Online</title>
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="bmi.css" />
+</head>
+<body>
+  <!-- Accessibility: jump to main content -->
+  <a class="skip-link" href="#main">Skip to content</a>
+ 
+  <!-- Header -->
+  <header>
+    <div class="container nav" role="navigation" aria-label="Main">
+      <a class="brand" href="/" aria-label="Bodylio Home">
+        <span class="logo" aria-hidden="true"></span>
+        <span>Healzy</span>
+      </a>
+ 
+      <nav>
+        <ul>
+          <li><a href="#bmi-categories">BMI Categories</a></li>
+          <!-- <li><a href="#gender-age">By Gender &amp; Age</a></li> -->
+          <li><a href="#why">Why Choose</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+ 
+      <a class="btn secondary" href="#bmi-widget">Calculate Now</a>
+    </div>
+  </header>
+ 
+  <main id="main">
+    <!-- Hero Section -->
+    <section class="hero" id="start">
+      <div class="container hero-inner">
+        <!-- Left: Text and CTAs -->
+        <div>
+          <span class="eyebrow">Most Accurate BMI Calculator Online</span>
+          <h1>
+            BMI Calculator<br />
+            <span class="brand-accent">For Women, Men &amp; All Ages</span>
+          </h1>
+          <p class="lead">
+            Calculate your Body Mass Index instantly with our advanced online BMI calculator.
+            Get personalized health insights tailored for your gender and age group.
+          </p>
+ 
+          <div class="cta-row">
+            <!-- <a class="btn" href="#bmi-widget">Calculate Your BMI Now</a> -->
+            <!-- <a class="btn secondary" href="#gender-age">Explore Calculators</a> -->
+          </div>
+          <!-- <div class="subtle">Takes less than 30 seconds</div> -->
+ 
+          <div class="stats" aria-label="Trust metrics">
+            <div class="stat"><div class="num">500K+</div><div class="label">Calculations Done</div></div>
+            <div class="stat"><div class="num">99.9%</div><div class="label">Accuracy Rate</div></div>
+            <div class="stat"><div class="num">Free</div><div class="label">Always</div></div>
+            <div class="stat"><div class="num">Instant</div><div class="label">Results</div></div>
+          </div>
+        </div>
+ 
+        <!-- Right: Embedded BMI Calculator -->
+        <aside class="hero-card" aria-label="BMI Calculator" id="bmi-widget">
+          <!-- <span class="eyebrow">Calculate Instantly</span> -->
+          <h3>Enter Your Details</h3>
+ 
+          <!-- Small info labels -->
+          <div class="helper"><span class="badge" id="unitLabel">Metric (kg, cm)</span></div>
+          <!-- <div class="helper">No data saved. Results are estimates (WHO ranges).</div> -->
+ 
+          <!-- BMI Form -->
+          <form id="bmiForm" novalidate style="margin-top:.75rem">
+            <div class="form-row">
+              <div>
+                <label for="inputWeight">Weight <span class="req">(kg) *</span></label>
+                <input type="number" id="inputWeight" inputmode="decimal" min="1" max="500" step="0.1" required />
+                <div class="helper" id="weightHelp">Example: 69</div>
+              </div>
+ 
+              <div>
+                <label for="inputHeight">Height <span class="req">(cm) *</span></label>
+                <input type="number" id="inputHeight" inputmode="decimal" min="30" max="300" step="0.1" required />
+                <div class="helper" id="heightHelp">Example: 169</div>
+              </div>
+            </div>
+ 
+            <div class="form-row" style="margin-top:.75rem">
+              <div>
+                <label for="inputAge">Age <span class="req">(optional)</span></label>
+                <input type="number" id="inputAge" inputmode="numeric" min="1" max="120" placeholder="Enter your age" />
+              </div>
+              <div>
+                <label for="selectGender">Gender <span class="req">(optional)</span></label>
+                <select id="selectGender">
+                  <option value="">Select</option>
+                  <option value="female">Female</option>
+                  <option value="male">Male</option>
+                  <option value="other">Other / Prefer not to say</option>
+                </select>
+              </div>
+            </div>
+ 
+            <div class="radio-row" style="margin-top:.75rem" role="radiogroup" aria-label="Units">
+              <span style="font-weight:600; margin-right:.25rem">Units:</span>
+              <label><input type="radio" name="radioUnits" value="metric" checked /> Metric</label>
+              <label><input type="radio" name="radioUnits" value="imperial" /> Imperial</label>
+            </div>
+ 
+            <div class="cta-row" style="margin-top:.9rem">
+              <button class="btn" type="submit">Calculate My BMI</button>
+              <button class="btn secondary" type="button" id="btnClear">Clear</button>
+            </div>
+          </form>
+ 
+          <div class="divider" role="presentation"></div>
+ 
+          <!-- Result -->
+          <div class="result-box" aria-live="polite" aria-atomic="true">
+            <h3>Your BMI Result</h3>
+            <p class="muted" id="textBeforeResult">Enter your details to see your BMI result</p>
+ 
+            <div id="resultBox" style="display:none">
+              <div class="bmi-value" id="textBmiValue">—</div>
+              <div class="bmi-cat" id="textBmiCategory">—</div>
+              <p class="muted" id="textBmiNote">WHO: Underweight &lt;18.5 · Normal 18.5–24.9 · Overweight 25–29.9 · Obesity ≥30</p>
+              <div class="helper" id="textTipLine"></div>
+            </div>
+          </div>
+ 
+          <div class="divider" role="presentation"></div>
+ 
+          <!-- Quick chips -->
+          <div class="badge-row" aria-label="WHO categories quick view">
+            <span class="badge">WHO Standards</span>
+            <span class="badge">Personalized Insights</span>
+            <span class="badge">Men &amp; Women</span>
+            <span class="badge">All Ages</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+ 
+    <!-- Understanding BMI Categories -->
+    <section id="bmi-categories" aria-labelledby="bmi-categories-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Understanding BMI Categories</span>
+          <h2 id="bmi-categories-title">WHO-Aligned BMI Classification</h2>
+          <p class="muted">Our BMI calculator online provides instant classification based on World Health Organization standards, with personalized recommendations for men and women of all ages.</p>
+        </div>
+ 
+        <div class="grid cols-4">
+          <div class="card" style="padding:.9rem">
+            <div class="cat-badge cat-under">Below 18.5</div>
+            <div>Underweight</div>
+          </div>
+          <div class="card" style="padding:.9rem">
+            <div class="cat-badge cat-normal">18.5 - 24.9</div>
+            <div>Normal Weight</div>
+          </div>
+          <div class="card" style="padding:.9rem">
+            <div class="cat-badge cat-over">25.0 - 29.9</div>
+            <div>Overweight</div>
+          </div>
+          <div class="card" style="padding:.9rem">
+            <div class="cat-badge cat-obese">30.0 and above</div>
+            <div>Obese</div>
+          </div>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- BMI by Gender & Age
+    <section id="gender-age">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">BMI Calculator by Gender &amp; Age</span>
+          <h2>Get more accurate results with our specialized calculators</h2>
+        </div>
+ 
+        <div class="grid cols-3">
+          <article class="card">
+            <div class="icon" aria-hidden="true">W</div>
+            <h3>BMI Calculator Women</h3>
+            <p>Specialized calculations considering women's unique body composition and health factors.</p>
+            <a class="btn secondary" href="#bmi-widget">Start for Women</a>
+          </article>
+ 
+          <article class="card">
+            <div class="icon" aria-hidden="true">M</div>
+            <h3>BMI Calculator Men</h3>
+            <p>Tailored BMI analysis for men with considerations for muscle mass and metabolism.</p>
+            <a class="btn secondary" href="#bmi-widget">Start for Men</a>
+          </article>
+ 
+          <article class="card">
+            <div class="icon" aria-hidden="true">A</div>
+            <h3>BMI Calculator by Age</h3>
+            <p>Age-adjusted BMI interpretations for different life stages and health considerations.</p>
+            <a class="btn secondary" href="#bmi-widget">Start by Age</a>
+          </article>
+        </div>
+      </div>
+    </section> -->
+ 
+    <!-- Why Choose -->
+    <section id="why">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Why Choose Our BMI Calculator Online?</span>
+          <h2>Designed for accuracy, personalization, and actionable insights</h2>
+        </div>
+ 
+        <div class="grid cols-2">
+          <div class="feature">
+            <div class="icon" aria-hidden="true">✓</div>
+            <div>
+              <h3>Accurate BMI Calculator</h3>
+              <p>Get precise BMI calculations with our advanced online calculator designed for both men and women of all ages.</p>
+            </div>
+          </div>
+ 
+          <div class="feature">
+            <div class="icon" aria-hidden="true">♀♂</div>
+            <div>
+              <h3>Gender-Specific Analysis</h3>
+              <p>Tailored BMI calculations for women and men with age-adjusted recommendations for optimal health.</p>
+            </div>
+          </div>
+ 
+          <div class="feature">
+            <div class="icon" aria-hidden="true">⏳</div>
+            <div>
+              <h3>Age-Adjusted Results</h3>
+              <p>Our BMI calculator by age provides personalized insights based on your life stage and health needs.</p>
+            </div>
+          </div>
+ 
+          <div class="feature">
+            <div class="icon" aria-hidden="true">❤</div>
+            <div>
+              <h3>Health Insights</h3>
+              <p>Beyond basic BMI calculation, get comprehensive health recommendations and lifestyle guidance.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- CTA -->
+    <section id="cta">
+      <div class="container">
+        <div class="cta-band">
+          <h2>Ready to Calculate Your BMI?</h2>
+          <p class="muted">Join thousands who trust our BMI calculator for accurate health insights</p>
+          <div class="cta-row" style="justify-content:center">
+            <a class="btn" href="#bmi-widget">Start Your BMI Calculation</a>
+          </div>
+          <div class="badge-row">
+            <span class="badge">100% Free</span>
+            <span class="badge">Secure</span>
+            <span class="badge">Instant</span>
+          </div>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Frequently Asked Questions</span>
+          <h2>Answers about BMI, gender differences, and age considerations</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>How accurate is this BMI calculator for women?</summary>
+            <p>Our BMI calculator for women provides accurate results based on the standard BMI formula. However, BMI doesn't account for muscle mass, bone density, or body composition differences that may vary between individuals.</p>
+          </details>
+          <details>
+            <summary>Is the BMI calculator different for men and women?</summary>
+            <p>The BMI calculation formula is the same for both men and women. However, our BMI calculator provides gender-specific health recommendations and considers that men and women may have different body composition and health considerations at the same BMI level.</p>
+          </details>
+          <details>
+            <summary>How does age affect BMI calculations?</summary>
+            <p>While the BMI formula doesn't change with age, our BMI calculator by age provides age-adjusted interpretations. As we age, muscle mass typically decreases and body composition changes, which may affect what constitutes a healthy BMI range for different age groups.</p>
+          </details>
+          <details>
+            <summary>Can I use this BMI calculator online for free?</summary>
+            <p>Yes! Our BMI calculator online is completely free to use. You can calculate your BMI instantly without any registration or fees. We provide detailed results with personalized health recommendations.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+ 
+  <!-- Footer -->
+  <footer aria-labelledby="footer-title">
+    <div class="container f-grid">
+      <div>
+        <h3 id="footer-title" class="footer-brand">
+          <span class="logo" aria-hidden="true"></span> Healzy
+        </h3>
+        <p class="muted">
+          The most trusted online BMI calculator for men, women, and all ages at healzy.com.
+          Get accurate BMI calculations with personalized health recommendations.
+        </p>
+        <div class="badge-row" style="justify-content:flex-start">
+          <span class="badge">500K+ Users</span>
+          <span class="badge">4.9/5 Rating</span>
+        </div>
+      </div>
+ 
+      <!-- <div class="f-col">
+        <h4>BMI Calculators</h4>
+        <ul class="list-unstyled">
+          <li><a href="#bmi-widget">BMI Calculator</a></li>
+          <li><a href="#gender-age">BMI Calculator Women</a></li>
+          <li><a href="#gender-age">BMI Calculator Men</a></li>
+          <li><a href="#gender-age">BMI Calculator by Age</a></li>
+        </ul>
+      </div> -->
+ 
+      <div class="f-col">
+        <h4>Health Resources</h4>
+        <ul class="list-unstyled">
+          <li><a href="#bmi-categories">BMI Chart</a></li>
+          <li><a href="#">Healthy Weight Guide</a></li>
+          <li><a href="#">Nutrition Tips</a></li>
+          <li><a href="#">Exercise Plans</a></li>
+        </ul>
+      </div>
+ 
+      <div class="f-col">
+        <h4>Company</h4>
+        <ul class="list-unstyled">
+          <li><a >Privacy Policy</a></li>
+          <li><a >Terms of Service</a></li>
+          <li><a >Contact</a> <span class="sep">•</span> <a href="#">About</a></li>
+          <li><a >Medical Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+ 
+    <div class="container legal">
+      <span>© 2026 Healzy. All rights reserved.</span>
+    </div>
+  </footer>
+ 
+  <!-- Main JS for the BMI widget -->
+  <script src="bmi.js"></script>
+</body>
+</html>
